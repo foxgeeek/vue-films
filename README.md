@@ -1,4 +1,4 @@
-# films
+# Posto
 
 ## Project setup
 ```

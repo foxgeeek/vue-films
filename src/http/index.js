@@ -7,7 +7,7 @@ Vue.use(VueResource)
 
 const http = Vue.http
 
-http.options.root = 'https://guarded-headland-11685.herokuapp.com/'
+http.options.root = 'https://api-posto.herokuapp.com/'
 
 http.interceptors.push(interceptors)
 

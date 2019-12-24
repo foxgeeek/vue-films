@@ -9,8 +9,8 @@
           <div class="form-group">
             <input
               required
-              type="email"
-              v-model="form.email"
+              type="text"
+              v-model="form.username"
               class="form-control"
               placeholder="E-mail"
             >
@@ -40,8 +40,8 @@ import { mapActions } from 'vuex'
 export default {
   data: () => ({
     form: {
-      email: 'dlowy12@google.co.uk',
-      password: 'xtPqmEFaip2'
+      username: 'opensystech',
+      password: 'ost123'
     }
   }),
   methods: {
@@ -49,10 +49,10 @@ export default {
     async submit () {
       try {
         await this.ActionDoLogin(this.form)
-
-        this.$router.push({ name: 'home' })
+        this.$router.push({ name: 'dashboard' })
       } catch (err) {
-        alert(err.data ? err.data.message : 'Não foi possível fazer login')
+        console.log(err)
+        // alert(err.data ? err.data.message : 'Não foi possível fazer login')
       }
     }
   }

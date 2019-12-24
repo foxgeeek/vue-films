@@ -4,8 +4,15 @@ import * as types from './mutation-types'
 
 export const ActionDoLogin = ({ dispatch }, payload) => {
   return services.auth.login(payload).then(res => {
-    dispatch('ActionSetUser', res.data.user)
-    dispatch('ActionSetToken', res.data.token)
+    dispatch('ActionSetUser', JSON.stringify(res.data.data.user))
+    dispatch('ActionSetToken', res.data.data.token)
+  })
+}
+
+export const ActionLogout = ({ dispatch }) => {
+  return services.auth.logout().then(() => {
+    storage.setHeaderToken('')
+    dispatch('ActionSignOut')
   })
 }
 
@@ -27,8 +34,7 @@ export const ActionCheckToken = ({ dispatch, state }) => {
 export const ActionLoadSession = ({ dispatch }) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { data: { user } } = await services.auth.loadSession()
-      dispatch('ActionSetUser', user)
+      dispatch('ActionSetUser', storage.getLocalUser())
       resolve()
     } catch (err) {
       dispatch('ActionSignOut')
@@ -38,6 +44,7 @@ export const ActionLoadSession = ({ dispatch }) => {
 }
 
 export const ActionSetUser = ({ commit }, payload) => {
+  storage.setLocalUser(payload)
   commit(types.SET_USER, payload)
 }
 
@@ -48,8 +55,9 @@ export const ActionSetToken = ({ commit }, payload) => {
 }
 
 export const ActionSignOut = ({ dispatch }) => {
-  storage.setHeaderToken('')
-  storage.deleteLocalToken()
   dispatch('ActionSetUser', {})
   dispatch('ActionSetToken', '')
+  storage.setHeaderToken('')
+  storage.deleteLocalUser()
+  storage.deleteLocalToken()
 }

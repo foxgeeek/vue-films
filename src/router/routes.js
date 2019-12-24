@@ -1,15 +1,21 @@
-import { routes as home } from '../views/home'
+import { routes as dashboard } from '../views/dashboard'
 import { routes as auth } from '../modules/auth'
-import { routes as series } from '../views/series'
-import { routes as watchlist } from '../views/watchlist'
-import { routes as showSerie } from '../views/show-serie'
-import { routes as watchedlist } from '../views/watchedlist'
+import { routes as clients } from '../views/dashboard/clients'
+import { routes as employees } from '../views/dashboard/employees'
+import { routes as fuels } from '../views/dashboard/fuels'
+import { routes as payments } from '../views/dashboard/payments'
+import { routes as products } from '../views/dashboard/products'
+import { routes as roles } from '../views/dashboard/roles'
+import { routes as users } from '../views/dashboard/users'
 
 export default [
   ...auth,
-  ...home,
-  ...showSerie,
-  ...watchlist,
-  ...watchedlist,
-  ...series
+  ...dashboard,
+  ...clients,
+  ...employees,
+  ...fuels,
+  ...payments,
+  ...products,
+  ...roles,
+  ...users
 ]
